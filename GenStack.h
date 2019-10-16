@@ -11,8 +11,8 @@ class GenStack
         ~GenStack();
 
         void push(T data);
-        char pop();
-        char peek();
+        T pop();
+        T peek();
 
         bool isFull();
         bool isEmpty();
@@ -36,7 +36,7 @@ template<typename T>
 GenStack<T>::GenStack(int maxSize)
 {
     myArray = new T[maxSize];
-    size = mazSize;
+    size = maxSize;
     top = -1;
 }
 
@@ -51,16 +51,15 @@ void GenStack<T>::push(T data)
 {
     if(isFull())
     {
-        size = size*2;
-        T *temp = new GenStack(size);
-        int i = 0;
-        foreach(T data: myArray)
+        T *temp = new T[size*2];
+        for(int i = 0; i < size; ++i)
         {
-            temp[i] = data;
-            ++i;
+            temp[i] = myArray[i];
         }
+        size = size*2;
         T *temp2 = myArray;
         myArray = temp;
+        temp = NULL;
         delete temp2;
     }
     myArray[++top] = data;
@@ -72,7 +71,7 @@ T GenStack<T>::pop()
     //error chacking, make sure isEmpty
     if(isEmpty())
     {
-        return NULL;
+        throw -1;
     }
     return myArray[top--];
 }
@@ -83,7 +82,7 @@ T GenStack<T>::peek()
     //error chacking, make sure isEmpty
     if(isEmpty())
     {
-        return NULL;
+        throw -1;
     }
     return myArray[top];
 }
@@ -92,11 +91,11 @@ template<typename T>
 bool GenStack<T>::isFull()
 {
     //error chacking, make sure full
-    if(top<size)
+    if(top==size-1)
     {
-        return false;
+        return true;
     }
-    return true;
+    return false;
 }
 
 template<typename T>
