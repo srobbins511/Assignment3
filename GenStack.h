@@ -6,17 +6,21 @@ template<typename T>
 class GenStack
 {
     public:
+    //constructor
         GenStack();
         GenStack(int maxSize);
         ~GenStack();
 
+        //central methods
         void push(T data);
         T pop();
         T peek();
 
+        //support methods
         bool isFull();
         bool isEmpty();
 
+        //data fields
         int size;
         int top;
 
@@ -24,6 +28,7 @@ class GenStack
 
 };
 
+//creates a stack with a defualt value
 template<typename T>
 GenStack<T>::GenStack()
 {
@@ -32,6 +37,7 @@ GenStack<T>::GenStack()
     top = -1;
 }
 
+//creates the starting array size for the stack based on a value given
 template<typename T>
 GenStack<T>::GenStack(int maxSize)
 {
@@ -40,12 +46,16 @@ GenStack<T>::GenStack(int maxSize)
     top = -1;
 }
 
+//destructor for the stack class
 template<typename T>
 GenStack<T>::~GenStack()
 {
     delete myArray;
 }
 
+//checks to see if the array is full
+//if the array is full it creates a new array double the size
+//it then sets the pointer of the original array to the new array and deletes the old array
 template<typename T>
 void GenStack<T>::push(T data)
 {
@@ -65,6 +75,9 @@ void GenStack<T>::push(T data)
     myArray[++top] = data;
 }
 
+//returns a value from the top of the stack
+//top is decremented so the value cannot be recovered
+//will throw -1 if the stack is empty
 template<typename T>
 T GenStack<T>::pop()
 {
@@ -76,6 +89,8 @@ T GenStack<T>::pop()
     return myArray[top--];
 }
 
+//returns the value at the top of the stack without decrementing the top
+//will throw -1 if the stack is empty
 template<typename T>
 T GenStack<T>::peek()
 {
@@ -87,6 +102,7 @@ T GenStack<T>::peek()
     return myArray[top];
 }
 
+//checks to see if the stack is full
 template<typename T>
 bool GenStack<T>::isFull()
 {
@@ -98,6 +114,7 @@ bool GenStack<T>::isFull()
     return false;
 }
 
+//checks to see if the stack is empty
 template<typename T>
 bool GenStack<T>::isEmpty()
 {

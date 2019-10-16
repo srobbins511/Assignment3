@@ -6,6 +6,7 @@
 using namespace std;
 
 //main method
+//hold the logic for checking multiple files after the first one is given from the command line
 int main(int argc, char** argv)
 {
     std::string fname = argv[1];
@@ -14,7 +15,7 @@ int main(int argc, char** argv)
     while(prgm->ErrorCheck())
     {
         cout << "No Errors found, to submit another file enter: F" << endl;
-        cout << "Else to quit enter anything else" << endl;
+        cout << "To quit enter anything else" << endl;
         cin >> input;
         if(input == "F")
         {
